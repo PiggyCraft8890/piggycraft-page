@@ -6,27 +6,47 @@
 
     <title>PiggyCraft</title>
 
+    <meta
+        name="description"
+        content="PiggyCraft — Minecraft, créations, aventures et communauté."
+    >
+
     <!-- Favicon -->
     <link rel="icon" href="/favicon.png" type="image/png">
 
-    <meta name="description" content="Bienvenue sur PiggyCraft — Minecraft, créations et aventures.">
-
     <style>
+
+        /* =========================================================
+           VARIABLES
+        ========================================================= */
+
+        :root {
+            --background: #08090d;
+            --background-2: #0d0f15;
+
+            --card: #11131b;
+            --card-hover: #171a24;
+
+            --text: #ffffff;
+            --muted: #a9acb8;
+
+            --pink: #ff61ba;
+            --blue: #17bdff;
+
+            --border: rgba(255, 255, 255, 0.08);
+
+            --radius: 18px;
+        }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-
-        :root {
-            --bg: #08090d;
-            --card: #11131a;
-            --card-hover: #181b24;
-            --text: #ffffff;
-            --muted: #a7a9b4;
-            --accent: #5865f2;
-            --accent-light: #7289ff;
-            --border: rgba(255,255,255,0.08);
         }
 
         html {
@@ -34,24 +54,48 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 50% -10%, rgba(88,101,242,0.22), transparent 35%),
-                var(--bg);
-            color: var(--text);
             min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(255, 97, 186, 0.13),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 85% 30%,
+                    rgba(23, 189, 255, 0.09),
+                    transparent 25%
+                ),
+
+                var(--background);
+
             overflow-x: hidden;
         }
 
-        /* NAVBAR */
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
 
         nav {
             position: fixed;
+
             top: 0;
             left: 0;
             right: 0;
+
             z-index: 100;
-            height: 70px;
+
+            height: 72px;
 
             display: flex;
             align-items: center;
@@ -59,45 +103,72 @@
 
             padding: 0 7%;
 
-            background: rgba(8,9,13,0.72);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border);
+            background: rgba(8, 9, 13, 0.72);
+
+            backdrop-filter: blur(16px);
+
+            border-bottom:
+                1px solid var(--border);
         }
+
 
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+
+            gap: 11px;
+
+            color: white;
+
+            text-decoration: none;
 
             font-size: 20px;
+
             font-weight: 800;
-            text-decoration: none;
-            color: white;
         }
 
+
+        /* Logo PiggyCraft */
+
         .nav-logo img {
-            width: 36px;
-            height: 36px;
-            object-fit: contain;
+            width: 38px;
+            height: 38px;
+
+            object-fit: cover;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 0 20px rgba(255, 97, 186, 0.18);
         }
+
 
         .nav-links {
             display: flex;
+
             gap: 28px;
         }
 
+
         .nav-links a {
             color: var(--muted);
+
             text-decoration: none;
+
             font-size: 14px;
+
             transition: 0.2s;
         }
+
 
         .nav-links a:hover {
             color: white;
         }
 
-        /* HERO */
+
+        /* =========================================================
+           HERO
+        ========================================================= */
 
         .hero {
             min-height: 100vh;
@@ -107,326 +178,910 @@
             justify-content: center;
 
             text-align: center;
-            padding: 120px 20px 80px;
+
+            padding:
+                140px
+                20px
+                90px;
         }
+
 
         .hero-content {
-            max-width: 850px;
+            width: 100%;
+
+            max-width: 900px;
         }
 
-        .hero-logo {
-            width: 140px;
-            height: 140px;
-            object-fit: contain;
 
-            filter: drop-shadow(0 0 35px rgba(88,101,242,0.35));
+        /* Badge */
 
-            animation: float 4s ease-in-out infinite;
+        .welcome-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            padding: 9px 15px;
+
+            border-radius: 999px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255, 97, 186, 0.10),
+                    rgba(23, 189, 255, 0.10)
+                );
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.10);
+
+            color: #dfe1eb;
+
+            font-size: 13px;
+
+            font-weight: 600;
         }
 
-        @keyframes float {
-            0%, 100% {
+
+        /* Petit logo dans le badge */
+
+        .welcome-logo {
+            width: 25px;
+            height: 25px;
+
+            object-fit: cover;
+
+            border-radius: 8px;
+
+            flex-shrink: 0;
+
+            box-shadow:
+                0 0 12px rgba(255, 97, 186, 0.25);
+
+            animation:
+                logoFloat 3.5s
+                ease-in-out
+                infinite;
+        }
+
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
                 transform: translateY(0);
             }
 
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-4px);
             }
         }
 
-        .badge {
-            display: inline-block;
 
-            margin-top: 25px;
-            padding: 8px 14px;
+        /* =========================================================
+           GRAND LOGO
+        ========================================================= */
 
-            border: 1px solid rgba(114,137,255,0.25);
-            border-radius: 999px;
+        .hero-logo {
+            display: block;
 
-            background: rgba(88,101,242,0.1);
-            color: #9da8ff;
+            width: 150px;
+            height: 150px;
 
-            font-size: 13px;
-            font-weight: 600;
+            object-fit: cover;
+
+            border-radius: 38px;
+
+            margin:
+                32px
+                auto
+                0;
+
+            box-shadow:
+                0 0 50px
+                rgba(255, 97, 186, 0.18),
+
+                0 0 80px
+                rgba(23, 189, 255, 0.10);
+
+            animation:
+                heroFloat 5s
+                ease-in-out
+                infinite;
         }
 
+
+        @keyframes heroFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+
+        /* =========================================================
+           TITRE
+        ========================================================= */
+
         h1 {
-            margin-top: 20px;
+            margin-top: 30px;
 
-            font-size: clamp(55px, 9vw, 100px);
-            line-height: 0.95;
+            padding-bottom: 10px;
+
+            font-size:
+                clamp(
+                    55px,
+                    9vw,
+                    100px
+                );
+
+            line-height: 1.08;
+
             font-weight: 900;
-            letter-spacing: -5px;
 
-            background: linear-gradient(
-                135deg,
-                #ffffff,
-                #9ba6ff
-            );
+            letter-spacing: -4px;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    var(--pink),
+                    #ffffff 45%,
+                    var(--blue)
+                );
 
             -webkit-background-clip: text;
+
             background-clip: text;
+
             color: transparent;
         }
 
+
         .hero-description {
-            max-width: 600px;
-            margin: 25px auto 0;
+            max-width: 620px;
+
+            margin:
+                22px
+                auto
+                0;
 
             color: var(--muted);
-            font-size: 19px;
-            line-height: 1.6;
+
+            font-size: 18px;
+
+            line-height: 1.7;
         }
+
+
+        /* =========================================================
+           BOUTONS
+        ========================================================= */
 
         .buttons {
             display: flex;
+
             justify-content: center;
+
             gap: 14px;
+
             flex-wrap: wrap;
 
-            margin-top: 35px;
+            margin-top: 32px;
         }
+
 
         .button {
             display: inline-flex;
+
             align-items: center;
             justify-content: center;
 
-            padding: 15px 24px;
+            gap: 9px;
 
-            border-radius: 12px;
+            padding:
+                14px
+                22px;
+
+            border-radius: 13px;
 
             text-decoration: none;
+
+            font-weight: 700;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s,
+                background 0.2s;
+        }
+
+
+        .button-primary {
+            color: white;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    var(--pink),
+                    #e96aae
+                );
+
+            box-shadow:
+                0 10px 30px
+                rgba(255, 97, 186, 0.20);
+        }
+
+
+        .button-primary:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 14px 35px
+                rgba(255, 97, 186, 0.30);
+        }
+
+
+        .button-secondary {
+            color: white;
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            border:
+                1px solid var(--border);
+        }
+
+
+        .button-secondary:hover {
+            transform: translateY(-3px);
+
+            background:
+                rgba(255, 255, 255, 0.08);
+        }
+
+
+        /* =========================================================
+           SECTIONS
+        ========================================================= */
+
+        section {
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin:
+                0 auto;
+
+            padding:
+                90px
+                25px;
+        }
+
+
+        .section-title {
+            text-align: center;
+
+            font-size: 38px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .section-description {
+            text-align: center;
+
+            color: var(--muted);
+
+            margin-bottom: 42px;
+        }
+
+
+        /* =========================================================
+           ABOUT CARDS
+        ========================================================= */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .card {
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.018)
+                );
+
+            border:
+                1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            transition:
+                transform 0.25s,
+                background 0.25s,
+                border-color 0.25s;
+        }
+
+
+        .card:hover {
+            transform: translateY(-5px);
+
+            background:
+                var(--card-hover);
+
+            border-color:
+                rgba(255, 97, 186, 0.18);
+        }
+
+
+        .card-icon {
+            font-size: 34px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .card h3 {
+            font-size: 20px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .card p {
+            color: var(--muted);
+
+            line-height: 1.65;
+        }
+
+
+        /* =========================================================
+           SOCIAL SECTION
+        ========================================================= */
+
+        .social-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        .social-card {
+            overflow: hidden;
+
+            background:
+                var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            transition:
+                transform 0.25s,
+                border-color 0.25s;
+        }
+
+
+        .social-card:hover {
+            transform: translateY(-4px);
+
+            border-color:
+                rgba(23, 189, 255, 0.20);
+        }
+
+
+        .social-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 20px;
+        }
+
+
+        .social-logo {
+            width: 50px;
+            height: 50px;
+
+            object-fit: cover;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,0.07);
+        }
+
+
+        .social-header h3 {
+            font-size: 20px;
+        }
+
+
+        .social-header p {
+            color: var(--muted);
+
+            font-size: 14px;
+
+            margin-top: 4px;
+        }
+
+
+        /* Twitch */
+
+        .twitch-preview {
+            width: 100%;
+
+            aspect-ratio: 16 / 9;
+
+            background: #000;
+        }
+
+
+        .twitch-preview iframe {
+            width: 100%;
+            height: 100%;
+
+            border: none;
+        }
+
+
+        .social-footer {
+            padding: 17px 20px;
+
+            border-top:
+                1px solid var(--border);
+        }
+
+
+        .social-footer a {
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+
+        .social-footer a:hover {
+            color: var(--pink);
+        }
+
+
+        /* YouTube */
+
+        .youtube-preview {
+            position: relative;
+
+            min-height: 245px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 30px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255, 97, 186, 0.15),
+                    transparent 60%
+                );
+        }
+
+
+        .youtube-icon {
+            width: 70px;
+            height: 50px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background:
+                #ff0033;
+
+            font-size: 25px;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(255, 0, 51, 0.20);
+        }
+
+
+        .youtube-preview h4 {
+            font-size: 22px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .youtube-preview p {
+            color: var(--muted);
+
+            line-height: 1.5;
+
+            max-width: 400px;
+        }
+
+
+        .youtube-button {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding:
+                11px
+                18px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            color: white;
+
+            text-decoration: none;
+
             font-weight: 700;
 
             transition: 0.2s;
         }
 
-        .button-primary {
-            background: var(--accent);
-            color: white;
 
-            box-shadow: 0 10px 30px rgba(88,101,242,0.25);
+        .youtube-button:hover {
+            background:
+                rgba(255, 255, 255, 0.12);
         }
 
-        .button-primary:hover {
-            background: var(--accent-light);
-            transform: translateY(-2px);
+
+        /* =========================================================
+           LINKS
+        ========================================================= */
+
+        .links-container {
+            display: flex;
+
+            justify-content: center;
         }
 
-        .button-secondary {
-            border: 1px solid var(--border);
-            background: rgba(255,255,255,0.04);
-            color: white;
-        }
-
-        .button-secondary:hover {
-            background: rgba(255,255,255,0.08);
-            transform: translateY(-2px);
-        }
-
-        /* SECTION */
-
-        section {
-            max-width: 1100px;
-            margin: auto;
-            padding: 90px 25px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 38px;
-            margin-bottom: 12px;
-        }
-
-        .section-description {
-            text-align: center;
-            color: var(--muted);
-            margin-bottom: 45px;
-        }
-
-        /* CARDS */
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .card {
-            padding: 30px;
-
-            background: linear-gradient(
-                145deg,
-                rgba(255,255,255,0.055),
-                rgba(255,255,255,0.02)
-            );
-
-            border: 1px solid var(--border);
-            border-radius: 18px;
-
-            transition: 0.25s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            background: var(--card-hover);
-            border-color: rgba(114,137,255,0.25);
-        }
-
-        .card-icon {
-            font-size: 35px;
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        /* LINKS */
-
-        .links {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
 
         .link-card {
+            width: 100%;
+
+            max-width: 650px;
+
             display: flex;
+
             align-items: center;
-            gap: 15px;
 
-            padding: 20px;
+            gap: 18px;
 
-            border-radius: 15px;
+            padding: 22px;
 
-            background: var(--card);
-            border: 1px solid var(--border);
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(255, 97, 186, 0.09),
+                    rgba(23, 189, 255, 0.08)
+                );
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.10);
+
+            border-radius: 18px;
 
             color: white;
+
             text-decoration: none;
 
-            transition: 0.2s;
+            transition:
+                transform 0.25s,
+                border-color 0.25s;
         }
+
 
         .link-card:hover {
-            transform: translateY(-3px);
-            background: var(--card-hover);
+            transform: translateY(-4px);
+
+            border-color:
+                rgba(255, 97, 186, 0.35);
         }
 
+
         .link-icon {
-            width: 45px;
-            height: 45px;
+            width: 52px;
+            height: 52px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
-            border-radius: 12px;
+            flex-shrink: 0;
 
-            background: rgba(255,255,255,0.07);
+            border-radius: 15px;
 
-            font-size: 21px;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--pink),
+                    var(--blue)
+                );
+
+            font-size: 23px;
         }
+
 
         .link-text strong {
             display: block;
-            margin-bottom: 4px;
+
+            font-size: 17px;
+
+            margin-bottom: 5px;
         }
+
 
         .link-text span {
             color: var(--muted);
-            font-size: 13px;
+
+            font-size: 14px;
         }
 
-        /* FOOTER */
+
+        /* =========================================================
+           EMAIL
+        ========================================================= */
+
+        .email-box {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 14px;
+
+            margin:
+                45px
+                auto
+                0;
+
+            max-width: 600px;
+
+            padding:
+                18px
+                22px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,0.035);
+        }
+
+
+        .email-icon {
+            font-size: 23px;
+        }
+
+
+        .email-box a {
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+
+        .email-box a:hover {
+            color: var(--blue);
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
 
         footer {
-            border-top: 1px solid var(--border);
-
-            padding: 35px 20px;
+            padding:
+                40px
+                20px;
 
             text-align: center;
 
+            border-top:
+                1px solid var(--border);
+
             color: #666a78;
+
             font-size: 13px;
         }
+
 
         footer strong {
             color: #9da1ad;
         }
 
-        /* MOBILE */
 
-        @media (max-width: 750px) {
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 800px) {
 
             nav {
                 padding: 0 20px;
             }
 
+
             .nav-links {
                 display: none;
             }
 
+
             .hero {
-                padding-top: 110px;
+                padding-top: 115px;
             }
+
 
             .hero-logo {
-                width: 110px;
-                height: 110px;
+                width: 125px;
+                height: 125px;
+
+                border-radius: 32px;
             }
 
+
             h1 {
+                font-size: 60px;
+
                 letter-spacing: -3px;
             }
+
 
             .hero-description {
                 font-size: 16px;
             }
 
-            .cards,
-            .links {
+
+            .cards {
                 grid-template-columns: 1fr;
             }
 
-            section {
-                padding: 65px 20px;
+
+            .social-grid {
+                grid-template-columns: 1fr;
             }
+
+
+            section {
+                padding:
+                    65px
+                    20px;
+            }
+
 
             .section-title {
                 font-size: 30px;
             }
         }
+
+
+        @media (max-width: 450px) {
+
+            h1 {
+                font-size: 50px;
+            }
+
+
+            .hero-logo {
+                width: 110px;
+                height: 110px;
+
+                border-radius: 28px;
+            }
+
+
+            .welcome-badge {
+                font-size: 12px;
+            }
+
+
+            .email-box {
+                flex-direction: column;
+
+                text-align: center;
+            }
+        }
+
     </style>
 </head>
 
+
 <body>
 
-    <!-- NAVIGATION -->
+
+    <!-- =========================================================
+         NAVIGATION
+    ========================================================== -->
 
     <nav>
 
-        <a class="nav-logo" href="/">
-            <img src="/favicon.png" alt="PiggyCraft">
+        <a
+            class="nav-logo"
+            href="/"
+        >
+
+            <img
+                src="/favicon.png"
+                alt="PiggyCraft"
+            >
+
             PiggyCraft
+
         </a>
 
+
         <div class="nav-links">
-            <a href="#about">À propos</a>
-            <a href="#links">Liens</a>
+
+            <a href="#about">
+                À propos
+            </a>
+
+            <a href="#socials">
+                Réseaux
+            </a>
+
+            <a href="#links">
+                Liens
+            </a>
+
         </div>
 
     </nav>
 
 
-    <!-- HERO -->
+
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
 
     <main>
 
@@ -434,37 +1089,64 @@
 
             <div class="hero-content">
 
-                <img
-                    src="/favicon.png"
-                    alt="Logo PiggyCraft"
-                    class="hero-logo"
-                >
 
-                <div class="badge">
-                    🐷 Bienvenue chez PiggyCraft
+                <!-- Bienvenue -->
+
+                <div class="welcome-badge">
+
+                    <img
+                        class="welcome-logo"
+                        src="/favicon.png"
+                        alt=""
+                    >
+
+                    <span>
+                        Bienvenue chez PiggyCraft
+                    </span>
+
                 </div>
 
-                <h1>PiggyCraft</h1>
+
+                <!-- Grand logo -->
+
+                <img
+                    class="hero-logo"
+                    src="/favicon.png"
+                    alt="Logo PiggyCraft"
+                >
+
+
+                <!-- Titre -->
+
+                <h1>
+                    PiggyCraft
+                </h1>
+
 
                 <p class="hero-description">
-                    Un univers Minecraft rempli de projets,
-                    d'aventures et de moments complètement débiles.
+
+                    Un univers rempli de Minecraft,
+                    de créations, d'aventures et de
+                    moments complètement débiles.
+
                 </p>
+
+
+                <!-- Boutons -->
 
                 <div class="buttons">
 
-                    <!-- REMPLACE LE LIEN -->
                     <a
                         class="button button-primary"
-                        href="https://discord.com"
-                        target="_blank"
+                        href="/link"
                     >
-                        💬 Rejoindre le Discord
+                        🔗 PiggyCraft Links
                     </a>
+
 
                     <a
                         class="button button-secondary"
-                        href="#links"
+                        href="#socials"
                     >
                         Découvrir PiggyCraft ↓
                     </a>
@@ -476,7 +1158,10 @@
         </section>
 
 
-        <!-- À PROPOS -->
+
+        <!-- =====================================================
+             À PROPOS
+        ====================================================== -->
 
         <section id="about">
 
@@ -484,17 +1169,25 @@
                 Qu'est-ce que PiggyCraft ?
             </h2>
 
+
             <p class="section-description">
-                Un petit projet qui ne demande qu'à devenir beaucoup trop gros.
+                Un petit projet qui ne demande qu'à devenir
+                beaucoup trop gros.
             </p>
+
 
             <div class="cards">
 
+
                 <div class="card">
 
-                    <div class="card-icon">⛏️</div>
+                    <div class="card-icon">
+                        ⛏️
+                    </div>
 
-                    <h3>Minecraft</h3>
+                    <h3>
+                        Minecraft
+                    </h3>
 
                     <p>
                         Des serveurs, des mods, des constructions
@@ -504,11 +1197,16 @@
                 </div>
 
 
+
                 <div class="card">
 
-                    <div class="card-icon">🎥</div>
+                    <div class="card-icon">
+                        🎥
+                    </div>
 
-                    <h3>Création de contenu</h3>
+                    <h3>
+                        Création de contenu
+                    </h3>
 
                     <p>
                         Vidéos, lives et projets autour de Minecraft
@@ -518,105 +1216,239 @@
                 </div>
 
 
+
                 <div class="card">
 
-                    <div class="card-icon">🐷</div>
+                    <div class="card-icon">
+                        🐷
+                    </div>
 
-                    <h3>La communauté</h3>
+                    <h3>
+                        La communauté
+                    </h3>
 
                     <p>
-                        Un endroit pour retrouver les membres de PiggyCraft
-                        et suivre les différents projets.
+                        Retrouvez PiggyCraft, ses projets et
+                        toutes les aventures de la communauté.
                     </p>
 
                 </div>
+
 
             </div>
 
         </section>
 
 
-        <!-- LIENS -->
 
-        <section id="links">
+        <!-- =====================================================
+             RÉSEAUX
+        ====================================================== -->
+
+        <section id="socials">
 
             <h2 class="section-title">
                 Retrouve PiggyCraft
             </h2>
 
+
             <p class="section-description">
-                Tous les liens importants au même endroit.
+                Suis les aventures en direct ou retrouve les vidéos.
             </p>
 
-            <div class="links">
 
-                <!-- DISCORD -->
+            <div class="social-grid">
+
+
+                <!-- =================================================
+                     TWITCH
+                ================================================== -->
+
+                <div class="social-card">
+
+                    <div class="social-header">
+
+                        <div class="social-logo">
+                            🎮
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Twitch
+                            </h3>
+
+                            <p>
+                                @APiggyCraft_
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="twitch-preview">
+
+                        <iframe
+                            src="https://player.twitch.tv/?channel=APiggyCraft_&parent=piggycraft.ca"
+                            allowfullscreen
+                        >
+                        </iframe>
+
+                    </div>
+
+
+                    <div class="social-footer">
+
+                        <a
+                            href="https://www.twitch.tv/APiggyCraft_"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            Voir la chaîne Twitch →
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     YOUTUBE
+                ================================================== -->
+
+                <div class="social-card">
+
+                    <div class="social-header">
+
+                        <div class="social-logo">
+                            ▶️
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                YouTube
+                            </h3>
+
+                            <p>
+                                @PiggyCraft88890
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="youtube-preview">
+
+                        <div class="youtube-icon">
+                            ▶
+                        </div>
+
+
+                        <h4>
+                            PiggyCraft
+                        </h4>
+
+
+                        <p>
+                            Retrouvez les vidéos,
+                            aventures Minecraft et
+                            autres projets sur YouTube.
+                        </p>
+
+
+                        <a
+                            class="youtube-button"
+                            href="https://www.youtube.com/@PiggyCraft88890"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            Visiter la chaîne
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             LIEN
+        ====================================================== -->
+
+        <section id="links">
+
+            <h2 class="section-title">
+                Tous mes liens
+            </h2>
+
+
+            <p class="section-description">
+                Retrouve tout ce qui concerne PiggyCraft au même endroit.
+            </p>
+
+
+            <div class="links-container">
 
                 <a
                     class="link-card"
-                    href="https://discord.com"
-                    target="_blank"
+                    href="/link"
                 >
 
-                    <div class="link-icon">💬</div>
+                    <div class="link-icon">
+                        🔗
+                    </div>
+
 
                     <div class="link-text">
 
-                        <strong>Discord</strong>
+                        <strong>
+                            PiggyCraft Links
+                        </strong>
 
                         <span>
-                            Rejoins la communauté
+                            Tous mes liens au même endroit
                         </span>
 
                     </div>
 
                 </a>
 
-
-                <!-- YOUTUBE -->
-
-                <a
-                    class="link-card"
-                    href="https://youtube.com"
-                    target="_blank"
-                >
-
-                    <div class="link-icon">▶️</div>
-
-                    <div class="link-text">
-
-                        <strong>YouTube</strong>
-
-                        <span>
-                            Vidéos et aventures
-                        </span>
-
-                    </div>
-
-                </a>
+            </div>
 
 
-                <!-- TWITCH -->
+            <!-- EMAIL -->
 
-                <a
-                    class="link-card"
-                    href="https://twitch.tv"
-                    target="_blank"
-                >
+            <div class="email-box">
 
-                    <div class="link-icon">🎮</div>
+                <div class="email-icon">
+                    ✉️
+                </div>
 
-                    <div class="link-text">
 
-                        <strong>Twitch</strong>
+                <div>
 
-                        <span>
-                            Lives et gaming
-                        </span>
+                    <span style="color: var(--muted);">
+                        Contact
+                    </span>
 
-                    </div>
+                    <br>
 
-                </a>
+                    <a
+                        href="mailto:piggycraft@piggycraft.ca"
+                    >
+                        piggycraft@piggycraft.ca
+                    </a>
+
+                </div>
 
             </div>
 
@@ -625,17 +1457,23 @@
     </main>
 
 
-    <!-- FOOTER -->
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
 
     <footer>
 
-        <strong>🐷 PiggyCraft</strong>
+        <strong>
+            🐷 PiggyCraft
+        </strong>
 
         <br><br>
 
         © 2026 PiggyCraft — Tous droits réservés.
 
     </footer>
+
 
 </body>
 </html>
