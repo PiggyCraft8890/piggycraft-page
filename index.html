@@ -1031,23 +1031,35 @@ footer strong {
             <h4>@PiggyCraft88890</h4>
 
             <div class="follower-count">
-                👥 <strong>XXX abonnés</strong>
+                👥 <strong id="youtube-subscribers">Chargement...</strong>
             </div>
 
-            <div class="latest-video">
+            <div class="latest-video" id="youtube-video-card">
 
-                <div class="latest-video-placeholder">
-                    Dernière vidéo YouTube
-                </div>
+                <a
+                    id="youtube-video-link"
+                    href="https://www.youtube.com/@PiggyCraft88890"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="display:block; color:inherit; text-decoration:none;"
+                >
+                    <img
+                        id="youtube-video-thumbnail"
+                        src=""
+                        alt="Dernière vidéo YouTube"
+                        style="width:100%; aspect-ratio:16 / 9; object-fit:cover; display:none;"
+                    >
+                </a>
 
-                <div class="latest-video-title">
-                    La dernière vidéo apparaîtra ici
+                <div class="latest-video-title" id="youtube-video-title">
+                    Chargement de la dernière vidéo...
                 </div>
 
             </div>
 
             <a
                 class="social-button"
+                id="youtube-main-button"
                 href="https://www.youtube.com/@PiggyCraft88890"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1143,12 +1155,18 @@ footer strong {
 
 
 <script>
-async function loadTwitchData() {
-    const followersEl = document.getElementById("twitch-followers");
-    const titleEl = document.getElementById("twitch-vod-title");
-    const thumbEl = document.getElementById("twitch-vod-thumbnail");
-    const linkEl = document.getElementById("twitch-vod-link");
-    const mainButton = document.getElementById("twitch-main-button");
+async function loadSocialData() {
+    const twitchFollowersEl = document.getElementById("twitch-followers");
+    const twitchTitleEl = document.getElementById("twitch-vod-title");
+    const twitchThumbEl = document.getElementById("twitch-vod-thumbnail");
+    const twitchLinkEl = document.getElementById("twitch-vod-link");
+    const twitchButtonEl = document.getElementById("twitch-main-button");
+
+    const youtubeSubscribersEl = document.getElementById("youtube-subscribers");
+    const youtubeTitleEl = document.getElementById("youtube-video-title");
+    const youtubeThumbEl = document.getElementById("youtube-video-thumbnail");
+    const youtubeLinkEl = document.getElementById("youtube-video-link");
+    const youtubeButtonEl = document.getElementById("youtube-main-button");
 
     try {
         const response = await fetch(
@@ -1157,66 +1175,126 @@ async function loadTwitchData() {
         );
 
         if (!response.ok) {
-            throw new Error("Réponse Twitch invalide");
+            throw new Error("Réponse du Worker invalide");
         }
 
         const data = await response.json();
 
-        if (followersEl) {
-            const count = Number(data.followers ?? 0);
-            followersEl.textContent = count + (count === 1 ? " follower" : " followers");
+        // TWITCH
+        if (data.twitch) {
+            if (twitchFollowersEl) {
+                const count = Number(data.twitch.followers ?? 0);
+                twitchFollowersEl.textContent =
+                    count + (count === 1 ? " follower" : " followers");
+            }
+
+            if (data.twitch.latestVod) {
+                if (twitchTitleEl) {
+                    twitchTitleEl.textContent =
+                        data.twitch.latestVod.title || "Dernière rediff Twitch";
+                }
+
+                if (twitchThumbEl && data.twitch.latestVod.thumbnail) {
+                    twitchThumbEl.src = data.twitch.latestVod.thumbnail;
+                    twitchThumbEl.style.display = "block";
+                }
+
+                if (twitchLinkEl && data.twitch.latestVod.url) {
+                    twitchLinkEl.href = data.twitch.latestVod.url;
+                }
+
+                if (twitchButtonEl && data.twitch.latestVod.url) {
+                    twitchButtonEl.href = data.twitch.latestVod.url;
+                    twitchButtonEl.textContent = "Voir la dernière rediff";
+                }
+            } else {
+                if (twitchTitleEl) {
+                    twitchTitleEl.textContent =
+                        "Aucune rediff disponible pour le moment";
+                }
+
+                if (twitchThumbEl) {
+                    twitchThumbEl.style.display = "none";
+                }
+
+                if (twitchButtonEl) {
+                    twitchButtonEl.href = "https://www.twitch.tv/PiggyCraft_";
+                    twitchButtonEl.textContent = "Voir la chaîne";
+                }
+            }
         }
 
-        if (data.latestVod) {
-            if (titleEl) {
-                titleEl.textContent = data.latestVod.title || "Dernière rediff Twitch";
+        // YOUTUBE
+        if (data.youtube) {
+            if (youtubeSubscribersEl) {
+                const count = Number(data.youtube.subscribers ?? 0);
+                youtubeSubscribersEl.textContent =
+                    count.toLocaleString("fr-CA") +
+                    (count === 1 ? " abonné" : " abonnés");
             }
 
-            if (thumbEl && data.latestVod.thumbnail) {
-                thumbEl.src = data.latestVod.thumbnail;
-                thumbEl.style.display = "block";
-            }
+            if (data.youtube.latestVideo) {
+                if (youtubeTitleEl) {
+                    youtubeTitleEl.textContent =
+                        data.youtube.latestVideo.title || "Dernière vidéo YouTube";
+                }
 
-            if (linkEl && data.latestVod.url) {
-                linkEl.href = data.latestVod.url;
-            }
+                if (youtubeThumbEl && data.youtube.latestVideo.thumbnail) {
+                    youtubeThumbEl.src = data.youtube.latestVideo.thumbnail;
+                    youtubeThumbEl.style.display = "block";
+                }
 
-            if (mainButton && data.latestVod.url) {
-                mainButton.href = data.latestVod.url;
-                mainButton.textContent = "Voir la dernière rediff";
-            }
-        } else {
-            if (titleEl) {
-                titleEl.textContent = "Aucune rediff disponible pour le moment";
-            }
+                if (youtubeLinkEl && data.youtube.latestVideo.url) {
+                    youtubeLinkEl.href = data.youtube.latestVideo.url;
+                }
 
-            if (thumbEl) {
-                thumbEl.style.display = "none";
-            }
+                if (youtubeButtonEl && data.youtube.latestVideo.url) {
+                    youtubeButtonEl.href = data.youtube.latestVideo.url;
+                    youtubeButtonEl.textContent = "Voir la dernière vidéo";
+                }
+            } else {
+                if (youtubeTitleEl) {
+                    youtubeTitleEl.textContent =
+                        "Aucune vidéo disponible pour le moment";
+                }
 
-            if (mainButton) {
-                mainButton.href = "https://www.twitch.tv/PiggyCraft_";
-                mainButton.textContent = "Voir la chaîne";
+                if (youtubeThumbEl) {
+                    youtubeThumbEl.style.display = "none";
+                }
+
+                if (youtubeButtonEl) {
+                    youtubeButtonEl.href =
+                        "https://www.youtube.com/@PiggyCraft88890";
+                    youtubeButtonEl.textContent = "Voir la chaîne";
+                }
             }
         }
     } catch (error) {
-        console.error("Erreur Twitch :", error);
+        console.error("Erreur réseaux :", error);
 
-        if (followersEl) {
-            followersEl.textContent = "Compteur indisponible";
+        if (twitchFollowersEl) {
+            twitchFollowersEl.textContent = "Compteur indisponible";
+        }
+        if (twitchTitleEl) {
+            twitchTitleEl.textContent = "Impossible de charger la dernière rediff";
+        }
+        if (twitchThumbEl) {
+            twitchThumbEl.style.display = "none";
         }
 
-        if (titleEl) {
-            titleEl.textContent = "Impossible de charger la dernière rediff";
+        if (youtubeSubscribersEl) {
+            youtubeSubscribersEl.textContent = "Compteur indisponible";
         }
-
-        if (thumbEl) {
-            thumbEl.style.display = "none";
+        if (youtubeTitleEl) {
+            youtubeTitleEl.textContent = "Impossible de charger la dernière vidéo";
+        }
+        if (youtubeThumbEl) {
+            youtubeThumbEl.style.display = "none";
         }
     }
 }
 
-loadTwitchData();
+loadSocialData();
 </script>
 
 <script>
