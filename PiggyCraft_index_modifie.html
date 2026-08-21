@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PiggyCraft</title>
+
+<meta name="description" content="Bienvenue chez PiggyCraft - Minecraft, créations, aventures et contenu.">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+
+<style>
+:root {
+    --bg: #08090d;
+    --bg2: #0e1017;
+    --card: #11131b;
+    --card-hover: #181b25;
+    --text: #ffffff;
+    --muted: #a7aab7;
+    --pink: #ff61ba;
+    --blue: #17bdff;
+    --border: rgba(255,255,255,.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 50% -10%, rgba(255,97,186,.14), transparent 30%),
+        radial-gradient(circle at 90% 30%, rgba(23,189,255,.09), transparent 28%),
+        var(--bg);
+    overflow-x: hidden;
+}
+
+/* NAVIGATION */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background: rgba(8,9,13,.75);
+    backdrop-filter: blur(16px);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    color: white;
+    text-decoration: none;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.nav-logo img {
+    width: 39px;
+    height: 39px;
+
+    object-fit: cover;
+    border-radius: 12px;
+
+    box-shadow: 0 0 20px rgba(255,97,186,.2);
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: .2s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 140px 20px 90px;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 900px;
+}
+
+.welcome-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 9px 15px;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,97,186,.1),
+            rgba(23,189,255,.1)
+        );
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    color: #e2e3e9;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.welcome-logo {
+    width: 26px;
+    height: 26px;
+
+    object-fit: cover;
+    border-radius: 8px;
+
+    animation: logoFloat 3.5s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+.hero-logo {
+    display: block;
+
+    width: 150px;
+    height: 150px;
+
+    object-fit: cover;
+
+    border-radius: 38px;
+
+    margin: 32px auto 0;
+
+    box-shadow:
+        0 0 50px rgba(255,97,186,.18),
+        0 0 80px rgba(23,189,255,.1);
+
+    animation: heroFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+h1 {
+    margin-top: 30px;
+    padding-bottom: 14px;
+
+    font-size: clamp(55px, 9vw, 100px);
+
+    line-height: 1.08;
+
+    font-weight: 900;
+
+    letter-spacing: -4px;
+
+    background:
+        linear-gradient(
+            110deg,
+            var(--pink),
+            #ffffff 45%,
+            var(--blue)
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.hero-description {
+    max-width: 620px;
+
+    margin: 22px auto 0;
+
+    color: var(--muted);
+
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+/* BUTTONS */
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+
+    flex-wrap: wrap;
+
+    margin-top: 32px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 14px 22px;
+
+    border-radius: 13px;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        background .2s;
+}
+
+.button-primary {
+    color: white;
+
+    background:
+        linear-gradient(
+            100deg,
+            var(--pink),
+            #e96aae
+        );
+
+    box-shadow:
+        0 10px 30px rgba(255,97,186,.2);
+}
+
+.button-primary:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 14px 35px rgba(255,97,186,.3);
+}
+
+.button-secondary {
+    color: white;
+
+    background: rgba(255,255,255,.045);
+
+    border: 1px solid var(--border);
+}
+
+.button-secondary:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,.08);
+}
+
+/* SECTIONS */
+
+section {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 90px 25px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 38px;
+
+    margin-bottom: 12px;
+}
+
+.section-description {
+    text-align: center;
+    color: var(--muted);
+
+    margin-bottom: 42px;
+}
+
+/* ABOUT */
+
+.cards {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.card {
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.018)
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    transition:
+        transform .25s,
+        background .25s,
+        border-color .25s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    background: var(--card-hover);
+
+    border-color:
+        rgba(255,97,186,.18);
+}
+
+.card-icon {
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+/* SOCIALS */
+
+.social-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+.social-card {
+    overflow: hidden;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    transition:
+        transform .25s,
+        border-color .25s;
+}
+
+.social-card:hover {
+    transform: translateY(-4px);
+
+    border-color:
+        rgba(23,189,255,.2);
+}
+
+.social-header {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 20px;
+}
+
+.social-logo {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.06);
+}
+
+.social-logo svg {
+    width: 29px;
+    height: 29px;
+}
+
+.social-header h3 {
+    font-size: 20px;
+}
+
+.social-header p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* TWITCH + YOUTUBE */
+
+.social-content {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 28px;
+}
+
+.social-big-logo {
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    border-radius: 18px;
+}
+
+.social-big-logo svg {
+    width: 38px;
+    height: 38px;
+}
+
+.twitch-logo-box {
+    background: #9146ff;
+    box-shadow: 0 12px 35px rgba(145,70,255,.25);
+}
+
+.youtube-logo-box {
+    background: #ff0033;
+    box-shadow: 0 12px 35px rgba(255,0,51,.2);
+}
+
+.social-content h4 {
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.follower-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.06);
+    color: #c8cad3;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.latest-video {
+    width: 100%;
+    max-width: 360px;
+    overflow: hidden;
+    border-radius: 13px;
+    background: rgba(255,255,255,.045);
+    border: 1px solid var(--border);
+    margin-bottom: 18px;
+}
+
+.latest-video-placeholder {
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at center, rgba(255,0,51,.13), transparent 65%);
+    color: var(--muted);
+    font-size: 14px;
+    padding: 20px;
+}
+
+.latest-video-title {
+    padding: 12px 14px;
+    color: #e8e9ee;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.social-button {
+    display: inline-block;
+    padding: 11px 18px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.07);
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.social-button:hover {
+    background: rgba(255,255,255,.12);
+}
+
+.social-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--border);
+}
+
+.social-footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.social-footer a:hover {
+    color: var(--pink);
+}
+
+/* LINKS */
+
+.links-container {
+    display: flex;
+    justify-content: center;
+}
+
+.link-card {
+    width: 100%;
+    max-width: 650px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 22px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(255,97,186,.09),
+            rgba(23,189,255,.08)
+        );
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    border-radius: 18px;
+
+    color: white;
+
+    text-decoration: none;
+
+    transition:
+        transform .25s,
+        border-color .25s;
+}
+
+.link-card:hover {
+    transform: translateY(-4px);
+
+    border-color:
+        rgba(255,97,186,.35);
+}
+
+.link-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--blue)
+        );
+
+    font-size: 23px;
+}
+
+.link-text strong {
+    display: block;
+
+    font-size: 17px;
+
+    margin-bottom: 5px;
+}
+
+.link-text span {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* EMAIL */
+
+.email-box {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    margin: 45px auto 0;
+
+    max-width: 600px;
+
+    padding: 18px 22px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,.035);
+}
+
+.email-icon {
+    font-size: 23px;
+}
+
+.email-box a {
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 700;
+}
+
+.email-box a:hover {
+    color: var(--blue);
+}
+
+/* FOOTER */
+
+footer {
+    padding: 40px 20px;
+
+    text-align: center;
+
+    border-top: 1px solid var(--border);
+
+    color: #666a78;
+
+    font-size: 13px;
+}
+
+footer strong {
+    color: #9da1ad;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    nav {
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding-top: 115px;
+    }
+
+    .hero-logo {
+        width: 125px;
+        height: 125px;
+
+        border-radius: 32px;
+    }
+
+    h1 {
+        font-size: 60px;
+        letter-spacing: -3px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .social-grid {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 65px 20px;
+    }
+
+    .section-title {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    h1 {
+        font-size: 50px;
+    }
+
+    .hero-logo {
+        width: 110px;
+        height: 110px;
+
+        border-radius: 28px;
+    }
+
+    .welcome-badge {
+        font-size: 12px;
+    }
+
+    .email-box {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<a class="nav-logo" href="/">
+    <img src="/favicon.png" alt="PiggyCraft">
+    PiggyCraft
+</a>
+
+<div class="nav-links">
+    <a href="#about">À propos</a>
+    <a href="#socials">Réseaux</a>
+    <a href="#links">Liens</a>
+</div>
+
+</nav>
+
+<main>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<div class="welcome-badge">
+
+    <img
+        class="welcome-logo"
+        src="/favicon.png"
+        alt=""
+    >
+
+    <span>
+        Bienvenue chez PiggyCraft
+    </span>
+
+</div>
+
+<img
+    class="hero-logo"
+    src="/favicon.png"
+    alt="Logo PiggyCraft"
+>
+
+<h1>
+    PiggyCraft
+</h1>
+
+<p class="hero-description">
+    Un univers rempli de Minecraft,
+    de créations, d'aventures et de
+    moments complètement débiles.
+</p>
+
+<div class="buttons">
+
+    <a
+        class="button button-primary"
+        href="https://memorylink.fr/piggycraft"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        🔗 PiggyCraft Links
+    </a>
+
+    <a
+        class="button button-secondary"
+        href="#socials"
+    >
+        Découvrir PiggyCraft ↓
+    </a>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="about">
+
+<h2 class="section-title">
+    Qui est PiggyCraft ?
+</h2>
+
+<p class="section-description">
+    Un petit youtubeur Québécois qui aime beaucoup jouer à Minecraft!
+</p>
+
+<div class="cards">
+
+    <div class="card">
+
+        <div class="card-icon">
+            ⛏️
+        </div>
+
+        <h3>
+            Minecraft
+        </h3>
+
+        <p>
+            Des survies, des mods et BEAUCOUP trop d'heures de jeu.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-icon">
+            🎥
+        </div>
+
+        <h3>
+            Création de contenu
+        </h3>
+
+        <p>
+            Quelques vidéos, des lives autour de Minecraft et de plein d'autres jeux.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-icon">
+            🐷
+        </div>
+
+        <h3>
+            La communauté
+        </h3>
+
+        <p>
+            Une petite communauté grandissante.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+<section id="socials">
+
+<h2 class="section-title">
+    Mes résaux
+</h2>
+
+<p class="section-description">
+    Suis mes aventures en direct ou retrouve mes vidéos.
+</p>
+
+<div class="social-grid">
+
+    <!-- TWITCH -->
+
+    <div class="social-card">
+
+        <div class="social-header">
+
+            <div class="social-logo">
+                <svg viewBox="0 0 24 24" fill="white" aria-label="Twitch">
+                    <path d="M4 2L2 5v15h5v3l3-3h4l6-6V2H4zm14 11l-3 3h-4l-2 2v-2H5V4h13v9zm-8-6H8v5h2V7zm5 0h-2v5h2V7z"/>
+                </svg>
+            </div>
+
+            <div>
+                <h3>Twitch</h3>
+                <p>@PiggyCraft_</p>
+            </div>
+
+        </div>
+
+        <div class="social-content">
+
+            <div class="social-big-logo twitch-logo-box">
+                <svg viewBox="0 0 24 24" fill="white">
+                    <path d="M4 2L2 5v15h5v3l3-3h4l6-6V2H4zm14 11l-3 3h-4l-2 2v-2H5V4h13v9zm-8-6H8v5h2V7zm5 0h-2v5h2V7z"/>
+                </svg>
+            </div>
+
+            <h4>@PiggyCraft_</h4>
+
+            <div class="follower-count">
+                👥 <strong>XXX followers</strong>
+            </div>
+
+            <a
+                class="social-button"
+                href="https://www.twitch.tv/PiggyCraft_"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Voir la chaîne
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- YOUTUBE -->
+
+    <div class="social-card">
+
+        <div class="social-header">
+
+            <div class="social-logo">
+                <svg viewBox="0 0 24 24" fill="white" aria-label="YouTube">
+                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.8V8.2l6.3 3.8-6.3 3.8z"/>
+                </svg>
+            </div>
+
+            <div>
+                <h3>YouTube</h3>
+                <p>@PiggyCraft88890</p>
+            </div>
+
+        </div>
+
+        <div class="social-content">
+
+            <div class="social-big-logo youtube-logo-box">
+                <svg viewBox="0 0 24 24" fill="white">
+                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.8V8.2l6.3 3.8-6.3 3.8z"/>
+                </svg>
+            </div>
+
+            <h4>@PiggyCraft88890</h4>
+
+            <div class="follower-count">
+                👥 <strong>XXX abonnés</strong>
+            </div>
+
+            <div class="latest-video">
+
+                <div class="latest-video-placeholder">
+                    Dernière vidéo YouTube
+                </div>
+
+                <div class="latest-video-title">
+                    La dernière vidéo apparaîtra ici
+                </div>
+
+            </div>
+
+            <a
+                class="social-button"
+                href="https://www.youtube.com/@PiggyCraft88890"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Voir la chaîne
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<section id="links">
+
+<h2 class="section-title">
+    Tous mes liens
+</h2>
+
+<p class="section-description">
+    Retrouve tous mes liens juste ici!
+</p>
+
+<div class="links-container">
+
+    <a
+        class="link-card"
+        href="https://memorylink.fr/piggycraft"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+
+        <div class="link-icon">
+            🔗
+        </div>
+
+        <div class="link-text">
+
+            <strong>
+                PiggyCraft Liens
+            </strong>
+
+            <span>
+                Tous mes liens au même endroit
+            </span>
+
+        </div>
+
+    </a>
+
+</div>
+
+<div class="email-box">
+
+    <div class="email-icon">
+        ✉
+    </div>
+
+    <div>
+
+        <span style="color:var(--muted);">
+            Contact
+        </span>
+
+        <br>
+
+        <a href="mailto:piggycraft@piggycraft.ca">
+            piggycraft@piggycraft.ca
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+
+<strong>
+    PiggyCraft
+</strong>
+
+<br><br>
+
+© 2026 PiggyCraft - Tous droits réservés.
+
+</footer>
+
+
+<script>
+(function () {
+    const logo = document.querySelector(".hero-logo");
+    if (!logo) return;
+
+    let clicks = 0;
+    let timer;
+
+    logo.addEventListener("click", function () {
+        clicks++;
+
+        clearTimeout(timer);
+
+        timer = setTimeout(function () {
+            clicks = 0;
+        }, 1000);
+
+        if (clicks === 5) {
+            clicks = 0;
+
+            logo.animate(
+                [
+                    { transform: "scale(1) rotate(0deg)" },
+                    { transform: "scale(1.15) rotate(-8deg)" },
+                    { transform: "scale(1.15) rotate(8deg)" },
+                    { transform: "scale(1.1) rotate(-5deg)" },
+                    { transform: "scale(1) rotate(0deg)" }
+                ],
+                {
+                    duration: 700,
+                    easing: "ease-out"
+                }
+            );
+
+            const message = document.createElement("div");
+            message.textContent = "PIGGY MODE ACTIVÉ 🐷";
+            message.style.position = "fixed";
+            message.style.left = "50%";
+            message.style.top = "50%";
+            message.style.transform = "translate(-50%, -50%)";
+            message.style.zIndex = "9999";
+            message.style.padding = "16px 24px";
+            message.style.borderRadius = "15px";
+            message.style.background = "linear-gradient(135deg, #ff61ba, #17bdff)";
+            message.style.color = "white";
+            message.style.fontWeight = "900";
+            message.style.fontSize = "18px";
+            message.style.boxShadow = "0 15px 50px rgba(0,0,0,.4)";
+            message.style.pointerEvents = "none";
+
+            document.body.appendChild(message);
+
+            message.animate(
+                [
+                    { opacity: 0, transform: "translate(-50%, -50%) scale(.7)" },
+                    { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
+                    { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
+                    { opacity: 0, transform: "translate(-50%, -60%) scale(1.05)" }
+                ],
+                {
+                    duration: 1800,
+                    easing: "ease-out"
+                }
+            );
+
+            setTimeout(function () {
+                message.remove();
+            }, 1800);
+        }
+    });
+})();
+</script>
+
+</body>
+</html>
