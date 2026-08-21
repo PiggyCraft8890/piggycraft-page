@@ -960,11 +960,35 @@ footer strong {
             <h4>@PiggyCraft_</h4>
 
             <div class="follower-count">
-                👥 <strong>XXX followers</strong>
+                👥 <strong id="twitch-followers">Chargement...</strong>
+            </div>
+
+            <div class="latest-video" id="twitch-vod-card">
+
+                <a
+                    id="twitch-vod-link"
+                    href="https://www.twitch.tv/PiggyCraft_"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="display:block; color:inherit; text-decoration:none;"
+                >
+                    <img
+                        id="twitch-vod-thumbnail"
+                        src=""
+                        alt="Dernière rediff Twitch"
+                        style="width:100%; aspect-ratio:16 / 9; object-fit:cover; display:none;"
+                    >
+                </a>
+
+                <div class="latest-video-title" id="twitch-vod-title">
+                    Chargement de la dernière rediff...
+                </div>
+
             </div>
 
             <a
                 class="social-button"
+                id="twitch-main-button"
                 href="https://www.twitch.tv/PiggyCraft_"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1116,6 +1140,84 @@ footer strong {
 
 </footer>
 
+
+
+<script>
+async function loadTwitchData() {
+    const followersEl = document.getElementById("twitch-followers");
+    const titleEl = document.getElementById("twitch-vod-title");
+    const thumbEl = document.getElementById("twitch-vod-thumbnail");
+    const linkEl = document.getElementById("twitch-vod-link");
+    const mainButton = document.getElementById("twitch-main-button");
+
+    try {
+        const response = await fetch(
+            "https://piggycraft-twitch.samuelgaumont.workers.dev",
+            { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+            throw new Error("Réponse Twitch invalide");
+        }
+
+        const data = await response.json();
+
+        if (followersEl) {
+            const count = Number(data.followers ?? 0);
+            followersEl.textContent = count + (count === 1 ? " follower" : " followers");
+        }
+
+        if (data.latestVod) {
+            if (titleEl) {
+                titleEl.textContent = data.latestVod.title || "Dernière rediff Twitch";
+            }
+
+            if (thumbEl && data.latestVod.thumbnail) {
+                thumbEl.src = data.latestVod.thumbnail;
+                thumbEl.style.display = "block";
+            }
+
+            if (linkEl && data.latestVod.url) {
+                linkEl.href = data.latestVod.url;
+            }
+
+            if (mainButton && data.latestVod.url) {
+                mainButton.href = data.latestVod.url;
+                mainButton.textContent = "Voir la dernière rediff";
+            }
+        } else {
+            if (titleEl) {
+                titleEl.textContent = "Aucune rediff disponible pour le moment";
+            }
+
+            if (thumbEl) {
+                thumbEl.style.display = "none";
+            }
+
+            if (mainButton) {
+                mainButton.href = "https://www.twitch.tv/PiggyCraft_";
+                mainButton.textContent = "Voir la chaîne";
+            }
+        }
+    } catch (error) {
+        console.error("Erreur Twitch :", error);
+
+        if (followersEl) {
+            followersEl.textContent = "Compteur indisponible";
+        }
+
+        if (titleEl) {
+            titleEl.textContent = "Impossible de charger la dernière rediff";
+        }
+
+        if (thumbEl) {
+            thumbEl.style.display = "none";
+        }
+    }
+}
+
+loadTwitchData();
+</script>
 
 <script>
 (function () {
