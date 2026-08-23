@@ -565,6 +565,131 @@ section {
     color: var(--pink);
 }
 
+
+/* LIVE TWITCH BUBBLE */
+
+.live-bubble-wrap {
+    display: none;
+    width: 100%;
+    max-width: 1100px;
+    margin: -42px auto 10px;
+    padding: 0 25px;
+}
+
+.live-bubble {
+    overflow: hidden;
+    border: 1px solid rgba(255, 97, 186, .24);
+    border-radius: 22px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(145, 70, 255, .12),
+            rgba(255, 97, 186, .08),
+            rgba(23, 189, 255, .07)
+        ),
+        var(--card);
+    box-shadow:
+        0 18px 55px rgba(0, 0, 0, .22),
+        0 0 45px rgba(255, 97, 186, .06);
+}
+
+.live-bubble-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.live-bubble-info {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.live-dot {
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #ff3b5c;
+    box-shadow: 0 0 0 5px rgba(255, 59, 92, .12);
+    animation: livePulse 1.7s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+    0%, 100% {
+        box-shadow: 0 0 0 4px rgba(255, 59, 92, .10);
+    }
+
+    50% {
+        box-shadow: 0 0 0 9px rgba(255, 59, 92, .02);
+    }
+}
+
+.live-bubble-text {
+    min-width: 0;
+}
+
+.live-bubble-text strong {
+    display: block;
+    font-size: 16px;
+}
+
+.live-bubble-title {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.live-badge {
+    flex-shrink: 0;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(255, 59, 92, .12);
+    color: #ff7890;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .04em;
+}
+
+.live-player {
+    width: 100%;
+    min-height: 300px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+
+.live-player iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    border: 0;
+}
+
+@media (max-width: 800px) {
+    .live-bubble-wrap {
+        margin-top: -24px;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .live-bubble-header {
+        align-items: flex-start;
+    }
+
+    .live-bubble-title {
+        white-space: normal;
+    }
+}
+
 /* LINKS */
 
 .links-container {
@@ -853,6 +978,39 @@ footer strong {
 </div>
 
 </section>
+
+
+<div class="live-bubble-wrap" id="twitch-live-bubble">
+
+    <div class="live-bubble">
+
+        <div class="live-bubble-header">
+
+            <div class="live-bubble-info">
+
+                <span class="live-dot"></span>
+
+                <div class="live-bubble-text">
+                    <strong>PiggyCraft est en direct sur Twitch !</strong>
+                    <div class="live-bubble-title" id="twitch-live-title">
+                        Live en cours
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="live-badge">
+                EN DIRECT
+            </div>
+
+        </div>
+
+        <div class="live-player" id="twitch-live-player"></div>
+
+    </div>
+
+</div>
+
 
 <section id="about">
 
@@ -1161,6 +1319,9 @@ async function loadSocialData() {
     const twitchThumbEl = document.getElementById("twitch-vod-thumbnail");
     const twitchLinkEl = document.getElementById("twitch-vod-link");
     const twitchButtonEl = document.getElementById("twitch-main-button");
+    const twitchLiveBubbleEl = document.getElementById("twitch-live-bubble");
+    const twitchLiveTitleEl = document.getElementById("twitch-live-title");
+    const twitchLivePlayerEl = document.getElementById("twitch-live-player");
 
     const youtubeSubscribersEl = document.getElementById("youtube-subscribers");
     const youtubeTitleEl = document.getElementById("youtube-video-title");
@@ -1186,6 +1347,35 @@ async function loadSocialData() {
                 const count = Number(data.twitch.followers ?? 0);
                 twitchFollowersEl.textContent =
                     count + (count === 1 ? " follower" : " followers");
+            }
+
+            if (data.twitch.live?.isLive) {
+                if (twitchLiveBubbleEl) {
+                    twitchLiveBubbleEl.style.display = "block";
+                }
+
+                if (twitchLiveTitleEl) {
+                    twitchLiveTitleEl.textContent =
+                        data.twitch.live.title || "Live en cours";
+                }
+
+                if (twitchLivePlayerEl && !twitchLivePlayerEl.querySelector("iframe")) {
+                    const iframe = document.createElement("iframe");
+                    iframe.src =
+                        "https://player.twitch.tv/?channel=PiggyCraft_&parent=piggycraft.ca&autoplay=false&muted=true";
+                    iframe.allowFullscreen = true;
+                    iframe.setAttribute("allow", "autoplay; fullscreen");
+                    iframe.title = "Live Twitch de PiggyCraft";
+                    twitchLivePlayerEl.appendChild(iframe);
+                }
+            } else {
+                if (twitchLiveBubbleEl) {
+                    twitchLiveBubbleEl.style.display = "none";
+                }
+
+                if (twitchLivePlayerEl) {
+                    twitchLivePlayerEl.innerHTML = "";
+                }
             }
 
             if (data.twitch.latestVod) {
