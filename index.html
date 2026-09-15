@@ -388,7 +388,8 @@ section {
 .social-grid {
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 560px);
+    justify-content: center;
 
     gap: 20px;
 }
@@ -479,10 +480,7 @@ section {
     height: 38px;
 }
 
-.twitch-logo-box {
-    background: #9146ff;
-    box-shadow: 0 12px 35px rgba(145,70,255,.25);
-}
+
 
 .youtube-logo-box {
     background: #ff0033;
@@ -565,130 +563,6 @@ section {
     color: var(--pink);
 }
 
-
-/* LIVE TWITCH BUBBLE */
-
-.live-bubble-wrap {
-    display: none;
-    width: 100%;
-    max-width: 1100px;
-    margin: -42px auto 10px;
-    padding: 0 25px;
-}
-
-.live-bubble {
-    overflow: hidden;
-    border: 1px solid rgba(255, 97, 186, .24);
-    border-radius: 22px;
-    background:
-        linear-gradient(
-            135deg,
-            rgba(145, 70, 255, .12),
-            rgba(255, 97, 186, .08),
-            rgba(23, 189, 255, .07)
-        ),
-        var(--card);
-    box-shadow:
-        0 18px 55px rgba(0, 0, 0, .22),
-        0 0 45px rgba(255, 97, 186, .06);
-}
-
-.live-bubble-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 18px 20px;
-    border-bottom: 1px solid var(--border);
-}
-
-.live-bubble-info {
-    min-width: 0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.live-dot {
-    width: 11px;
-    height: 11px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: #ff3b5c;
-    box-shadow: 0 0 0 5px rgba(255, 59, 92, .12);
-    animation: livePulse 1.7s ease-in-out infinite;
-}
-
-@keyframes livePulse {
-    0%, 100% {
-        box-shadow: 0 0 0 4px rgba(255, 59, 92, .10);
-    }
-
-    50% {
-        box-shadow: 0 0 0 9px rgba(255, 59, 92, .02);
-    }
-}
-
-.live-bubble-text {
-    min-width: 0;
-}
-
-.live-bubble-text strong {
-    display: block;
-    font-size: 16px;
-}
-
-.live-bubble-title {
-    margin-top: 4px;
-    color: var(--muted);
-    font-size: 13px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.live-badge {
-    flex-shrink: 0;
-    padding: 7px 11px;
-    border-radius: 999px;
-    background: rgba(255, 59, 92, .12);
-    color: #ff7890;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: .04em;
-}
-
-.live-player {
-    width: 100%;
-    min-height: 300px;
-    aspect-ratio: 16 / 9;
-    background: #000;
-}
-
-.live-player iframe {
-    display: block;
-    width: 100%;
-    height: 100%;
-    min-height: 300px;
-    border: 0;
-}
-
-@media (max-width: 800px) {
-    .live-bubble-wrap {
-        margin-top: -24px;
-        padding: 0 20px;
-    }
-}
-
-@media (max-width: 500px) {
-    .live-bubble-header {
-        align-items: flex-start;
-    }
-
-    .live-bubble-title {
-        white-space: normal;
-    }
-}
 
 /* LINKS */
 
@@ -996,38 +870,6 @@ footer strong {
 </section>
 
 
-<div class="live-bubble-wrap" id="twitch-live-bubble">
-
-    <div class="live-bubble">
-
-        <div class="live-bubble-header">
-
-            <div class="live-bubble-info">
-
-                <span class="live-dot"></span>
-
-                <div class="live-bubble-text">
-                    <strong>PiggyCraft est en direct sur Twitch !</strong>
-                    <div class="live-bubble-title" id="twitch-live-title">
-                        Live en cours
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="live-badge">
-                EN DIRECT
-            </div>
-
-        </div>
-
-        <div class="live-player" id="twitch-live-player"></div>
-
-    </div>
-
-</div>
-
-
 <section id="about">
 
 <h2 class="section-title">
@@ -1067,7 +909,7 @@ footer strong {
         </h3>
 
         <p>
-            Quelques vidéos, des lives autour de Minecraft et de plein d'autres jeux.
+            Quelques vidéos autour de Minecraft et de plein d'autres jeux.
         </p>
 
     </div>
@@ -1099,81 +941,10 @@ footer strong {
 </h2>
 
 <p class="section-description">
-    Suis mes aventures en direct ou retrouve mes vidéos.
+    Retrouve mes vidéos et mes aventures sur YouTube.
 </p>
 
 <div class="social-grid">
-
-    <!-- TWITCH -->
-
-    <div class="social-card">
-
-        <div class="social-header">
-
-            <div class="social-logo">
-                <svg viewBox="0 0 24 24" fill="white" aria-label="Twitch">
-                    <path d="M4 2L2 5v15h5v3l3-3h4l6-6V2H4zm14 11l-3 3h-4l-2 2v-2H5V4h13v9zm-8-6H8v5h2V7zm5 0h-2v5h2V7z"/>
-                </svg>
-            </div>
-
-            <div>
-                <h3>Twitch</h3>
-                <p>@PiggyCraft_</p>
-            </div>
-
-        </div>
-
-        <div class="social-content">
-
-            <div class="social-big-logo twitch-logo-box">
-                <svg viewBox="0 0 24 24" fill="white">
-                    <path d="M4 2L2 5v15h5v3l3-3h4l6-6V2H4zm14 11l-3 3h-4l-2 2v-2H5V4h13v9zm-8-6H8v5h2V7zm5 0h-2v5h2V7z"/>
-                </svg>
-            </div>
-
-            <h4>@PiggyCraft_</h4>
-
-            <div class="follower-count">
-                👥 <strong id="twitch-followers">Chargement...</strong>
-            </div>
-
-            <div class="latest-video" id="twitch-vod-card">
-
-                <a
-                    id="twitch-vod-link"
-                    href="https://www.twitch.tv/PiggyCraft_"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style="display:block; color:inherit; text-decoration:none;"
-                >
-                    <img
-                        id="twitch-vod-thumbnail"
-                        src=""
-                        alt="Dernière rediff Twitch"
-                        style="width:100%; aspect-ratio:16 / 9; object-fit:cover; display:none;"
-                    >
-                </a>
-
-                <div class="latest-video-title" id="twitch-vod-title">
-                    Chargement de la dernière rediff...
-                </div>
-
-            </div>
-
-            <a
-                class="social-button"
-                id="twitch-main-button"
-                href="https://www.twitch.tv/PiggyCraft_"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Voir la chaîne
-            </a>
-
-        </div>
-
-    </div>
-
 
     <!-- YOUTUBE -->
 
@@ -1336,15 +1107,6 @@ footer strong {
 
 <script>
 async function loadSocialData() {
-    const twitchFollowersEl = document.getElementById("twitch-followers");
-    const twitchTitleEl = document.getElementById("twitch-vod-title");
-    const twitchThumbEl = document.getElementById("twitch-vod-thumbnail");
-    const twitchLinkEl = document.getElementById("twitch-vod-link");
-    const twitchButtonEl = document.getElementById("twitch-main-button");
-    const twitchLiveBubbleEl = document.getElementById("twitch-live-bubble");
-    const twitchLiveTitleEl = document.getElementById("twitch-live-title");
-    const twitchLivePlayerEl = document.getElementById("twitch-live-player");
-
     const youtubeSubscribersEl = document.getElementById("youtube-subscribers");
     const youtubeTitleEl = document.getElementById("youtube-video-title");
     const youtubeThumbEl = document.getElementById("youtube-video-thumbnail");
@@ -1356,87 +1118,10 @@ async function loadSocialData() {
             "https://piggycraft-twitch.samuelgaumont.workers.dev",
             { cache: "no-store" }
         );
-
-        if (!response.ok) {
-            throw new Error("Réponse du Worker invalide");
-        }
+        if (!response.ok) throw new Error("Réponse du Worker invalide");
 
         const data = await response.json();
 
-        // TWITCH
-        if (data.twitch) {
-            if (twitchFollowersEl) {
-                const count = Number(data.twitch.followers ?? 0);
-                twitchFollowersEl.textContent =
-                    count + (count === 1 ? " follower" : " followers");
-            }
-
-            if (data.twitch.live?.isLive) {
-                if (twitchLiveBubbleEl) {
-                    twitchLiveBubbleEl.style.display = "block";
-                }
-
-                if (twitchLiveTitleEl) {
-                    twitchLiveTitleEl.textContent =
-                        data.twitch.live.title || "Live en cours";
-                }
-
-                if (twitchLivePlayerEl && !twitchLivePlayerEl.querySelector("iframe")) {
-                    const iframe = document.createElement("iframe");
-                    iframe.src =
-                        "https://player.twitch.tv/?channel=PiggyCraft_&parent=piggycraft.ca&autoplay=false&muted=true";
-                    iframe.allowFullscreen = true;
-                    iframe.setAttribute("allow", "autoplay; fullscreen");
-                    iframe.title = "Live Twitch de PiggyCraft";
-                    twitchLivePlayerEl.appendChild(iframe);
-                }
-            } else {
-                if (twitchLiveBubbleEl) {
-                    twitchLiveBubbleEl.style.display = "none";
-                }
-
-                if (twitchLivePlayerEl) {
-                    twitchLivePlayerEl.innerHTML = "";
-                }
-            }
-
-            if (data.twitch.latestVod) {
-                if (twitchTitleEl) {
-                    twitchTitleEl.textContent =
-                        data.twitch.latestVod.title || "Dernière rediff Twitch";
-                }
-
-                if (twitchThumbEl && data.twitch.latestVod.thumbnail) {
-                    twitchThumbEl.src = data.twitch.latestVod.thumbnail;
-                    twitchThumbEl.style.display = "block";
-                }
-
-                if (twitchLinkEl && data.twitch.latestVod.url) {
-                    twitchLinkEl.href = data.twitch.latestVod.url;
-                }
-
-                if (twitchButtonEl && data.twitch.latestVod.url) {
-                    twitchButtonEl.href = data.twitch.latestVod.url;
-                    twitchButtonEl.textContent = "Voir la dernière rediff";
-                }
-            } else {
-                if (twitchTitleEl) {
-                    twitchTitleEl.textContent =
-                        "Aucune rediff disponible pour le moment";
-                }
-
-                if (twitchThumbEl) {
-                    twitchThumbEl.style.display = "none";
-                }
-
-                if (twitchButtonEl) {
-                    twitchButtonEl.href = "https://www.twitch.tv/PiggyCraft_";
-                    twitchButtonEl.textContent = "Voir la chaîne";
-                }
-            }
-        }
-
-        // YOUTUBE
         if (data.youtube) {
             if (youtubeSubscribersEl) {
                 const count = Number(data.youtube.subscribers ?? 0);
@@ -1446,66 +1131,31 @@ async function loadSocialData() {
             }
 
             if (data.youtube.latestVideo) {
-                if (youtubeTitleEl) {
+                if (youtubeTitleEl)
                     youtubeTitleEl.textContent =
                         data.youtube.latestVideo.title || "Dernière vidéo YouTube";
-                }
 
                 if (youtubeThumbEl && data.youtube.latestVideo.thumbnail) {
                     youtubeThumbEl.src = data.youtube.latestVideo.thumbnail;
                     youtubeThumbEl.style.display = "block";
                 }
 
-                if (youtubeLinkEl && data.youtube.latestVideo.url) {
+                if (youtubeLinkEl && data.youtube.latestVideo.url)
                     youtubeLinkEl.href = data.youtube.latestVideo.url;
-                }
 
                 if (youtubeButtonEl && data.youtube.latestVideo.url) {
                     youtubeButtonEl.href = data.youtube.latestVideo.url;
                     youtubeButtonEl.textContent = "Voir la dernière vidéo";
                 }
-            } else {
-                if (youtubeTitleEl) {
-                    youtubeTitleEl.textContent =
-                        "Aucune vidéo disponible pour le moment";
-                }
-
-                if (youtubeThumbEl) {
-                    youtubeThumbEl.style.display = "none";
-                }
-
-                if (youtubeButtonEl) {
-                    youtubeButtonEl.href =
-                        "https://www.youtube.com/@PiggyCraft88890";
-                    youtubeButtonEl.textContent = "Voir la chaîne";
-                }
             }
         }
     } catch (error) {
-        console.error("Erreur réseaux :", error);
-
-        if (twitchFollowersEl) {
-            twitchFollowersEl.textContent = "Compteur indisponible";
-        }
-        if (twitchTitleEl) {
-            twitchTitleEl.textContent = "Impossible de charger la dernière rediff";
-        }
-        if (twitchThumbEl) {
-            twitchThumbEl.style.display = "none";
-        }
-
-        if (youtubeSubscribersEl) {
-            youtubeSubscribersEl.textContent = "Compteur indisponible";
-        }
-        if (youtubeTitleEl) {
-            youtubeTitleEl.textContent = "Impossible de charger la dernière vidéo";
-        }
-        if (youtubeThumbEl) {
-            youtubeThumbEl.style.display = "none";
-        }
+        console.error("Erreur YouTube :", error);
+        if (youtubeSubscribersEl) youtubeSubscribersEl.textContent = "Compteur indisponible";
+        if (youtubeTitleEl) youtubeTitleEl.textContent = "Impossible de charger la dernière vidéo";
+        if (youtubeThumbEl) youtubeThumbEl.style.display = "none";
     }
 }
-
 loadSocialData();
 </script>
 
