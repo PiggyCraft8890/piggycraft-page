@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UniqueFan — PiggyCraft</title>
+<link rel="icon" href="uniquefan-favicon.png" type="image/png">
 <style>
 :root{--blue:#00aff0;--bg:#f7f7f7;--card:#fff;--text:#222;--muted:#888;--border:#e5e5e5}
 *{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg)}
@@ -50,4 +51,42 @@
 </main>
 <aside class="right-column"><div class="creator-card"><h3>À propos du créateur</h3><div class="creator-line"><img src="profile.jpg" alt="PiggyCraft"><div><strong>PiggyCraft</strong><br><span style="color:#888">@PiggyCraft88890</span></div></div><button class="subscribe">S'abonner $67/mois</button></div></aside>
 </div>
+<script>
+let logoClicks = 0;
+let logoTimer;
+
+const logo = document.querySelector('.logo');
+
+logo.addEventListener('click', function () {
+    logoClicks++;
+
+    clearTimeout(logoTimer);
+
+    logoTimer = setTimeout(function () {
+        logoClicks = 0;
+    }, 2000);
+
+    if (logoClicks === 5) {
+        logoClicks = 0;
+
+        logo.animate(
+            [
+                { transform: "scale(1) rotate(0deg)" },
+                { transform: "scale(1.15) rotate(-8deg)" },
+                { transform: "scale(1.15) rotate(8deg)" },
+                { transform: "scale(1.1) rotate(-5deg)" },
+                { transform: "scale(1) rotate(0deg)" }
+            ],
+            {
+                duration: 700,
+                easing: "ease-out"
+            }
+        );
+
+        setTimeout(function () {
+            window.location.href = "/";
+        }, 700);
+    }
+});
+</script>
 </body></html>
