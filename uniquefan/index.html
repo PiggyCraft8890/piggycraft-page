@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UniqueFan — PiggyCraft</title>
+<style>
+:root{--blue:#00aff0;--bg:#f7f7f7;--card:#fff;--text:#222;--muted:#888;--border:#e5e5e5}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg)}
+.topbar{height:88px;position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.topbar-inner{width:min(1120px,calc(100% - 32px));display:flex;align-items:center;gap:24px}
+.logo{width:300px;height:66px;object-fit:contain;flex-shrink:0}
+.search{flex:1;max-width:420px;margin:auto}.search input{width:100%;border:0;outline:0;background:#f1f1f1;border-radius:22px;padding:12px 18px;font-size:14px}
+.top-button{border:0;background:var(--blue);color:#fff;font-weight:700;border-radius:22px;padding:11px 18px;cursor:pointer}
+.layout{width:min(1120px,calc(100% - 32px));margin:28px auto;display:grid;grid-template-columns:220px minmax(0,650px) 220px;gap:24px}
+.sidebar{position:sticky;top:116px;height:max-content}.menu{background:#fff;border:1px solid var(--border);border-radius:12px;padding:8px}.menu a{display:block;text-decoration:none;color:#444;padding:13px 14px;border-radius:9px;font-size:14px;font-weight:600}.menu a:hover,.menu a.active{background:#eefaff;color:#008fc5}
+.small-card,.creator-card{margin-top:14px;padding:16px;background:#fff;border:1px solid var(--border);border-radius:12px;font-size:13px;color:var(--muted);line-height:1.5}
+.profile{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px}.cover{height:150px;background:linear-gradient(120deg,#00aff0,#48c9f5)}
+.profile-content{padding:0 22px 22px}.avatar{width:92px;height:92px;margin-top:-46px;border-radius:50%;border:5px solid #fff;background:#fff;object-fit:cover}
+.profile-row{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}.profile h1{margin:10px 0 2px;font-size:22px}.handle{color:var(--muted);font-size:14px}.bio{margin:14px 0 0;color:#555;line-height:1.5;font-size:14px}.follow{margin-top:10px;border:0;border-radius:20px;background:var(--blue);color:#fff;padding:10px 20px;font-weight:700}
+.tabs{display:flex;background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:18px;overflow:hidden}.tabs div{flex:1;text-align:center;padding:15px 8px;font-size:14px;font-weight:700;color:var(--muted)}.tabs .selected{color:var(--blue);border-bottom:3px solid var(--blue)}
+.post{background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:18px;overflow:hidden}.post-head{display:flex;align-items:center;gap:10px;padding:15px 17px}.post-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover}.post-name{font-weight:700;font-size:14px}.post-time{color:var(--muted);font-size:12px;margin-top:2px}.post-text{padding:0 17px 15px;font-size:14px;line-height:1.5}.post-image{display:block;width:100%;max-height:620px;object-fit:cover;background:#eee}.post-actions{display:flex;gap:22px;padding:13px 17px;color:#777;border-top:1px solid var(--border);font-size:13px}
+.creator-card{margin-top:0;height:max-content}.creator-card h3{margin:0 0 12px;font-size:15px}.creator-line{display:flex;gap:10px;align-items:center;margin-bottom:12px;font-size:13px}.creator-line img{width:38px;height:38px;object-fit:cover;border-radius:50%}.subscribe{width:100%;border:0;background:var(--blue);color:#fff;border-radius:20px;padding:11px;font-weight:700}
+@media(max-width:900px){.layout{grid-template-columns:1fr;max-width:650px}.sidebar,.right-column{display:none}.search{display:none}.logo{width:300px}}
+@media(max-width:560px){.topbar-inner{justify-content:space-between}.logo{width:230px;height:55px}.layout{width:100%;margin:12px auto}.profile,.tabs,.post{border-left:0;border-right:0;border-radius:0}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<img class="logo" src="uniquefan-logo-cropped.png" alt="UniqueFan">
+<div class="search"><input type="text" placeholder="Rechercher"></div>
+<button class="top-button">S'inscrire</button>
+</div></header>
+<div class="layout">
+<aside class="sidebar"><nav class="menu">
+<a class="active" href="#">Accueil</a><a href="#">Notifications</a><a href="#">Messages</a><a href="#">Abonnements</a><a href="#">Profil</a>
+</nav><div class="small-card"><strong>UniqueFan</strong><br><br>La plateforme où absolument personne ne s'attendait à retrouver PiggyCraft.</div></aside>
+<main>
+<section class="profile"><div class="cover"></div><div class="profile-content"><div class="profile-row"><div>
+<img class="avatar" src="profile.jpg" alt="PiggyCraft">
+<h1>PiggyCraft ✓</h1><div class="handle">@PiggyCraft88890</div>
+</div><button class="follow">Suivre</button></div>
+<p class="bio">Bienvenue sur UniqueFan 🐷<br>Du contenu totalement exclusif, absolument inutile et beaucoup trop drôle.</p>
+</div></section>
+<div class="tabs"><div class="selected">Publications</div><div>Médias</div><div>À propos</div></div>
+<article class="post"><div class="post-head"><img class="post-avatar" src="profile.jpg" alt="PiggyCraft"><div><div class="post-name">PiggyCraft ✓</div><div class="post-time">Il y a 2 heures</div></div></div><div class="post-text">Une publication absolument essentielle à l'humanité.</div><img class="post-image" src="photo1.jpg" alt="Publication UniqueFan"><div class="post-actions">♡ J'aime &nbsp;&nbsp; 💬 Commenter &nbsp;&nbsp; ↗ Partager</div></article>
+<article class="post"><div class="post-head"><img class="post-avatar" src="profile.jpg" alt="PiggyCraft"><div><div class="post-name">PiggyCraft ✓</div><div class="post-time">Hier</div></div></div><div class="post-text">Je ne sais pas pourquoi cette photo existe. Mais maintenant elle est ici.</div><img class="post-image" src="photo2.jpg" alt="Publication UniqueFan"><div class="post-actions">♡ J'aime &nbsp;&nbsp; 💬 Commenter &nbsp;&nbsp; ↗ Partager</div></article>
+<article class="post"><div class="post-head"><img class="post-avatar" src="profile.jpg" alt="PiggyCraft"><div><div class="post-name">PiggyCraft ✓</div><div class="post-time">La semaine dernière</div></div></div><div class="post-text">Contenu tellement exclusif qu'il n'aurait probablement jamais dû être publié.</div><img class="post-image" src="photo3.jpg" alt="Publication UniqueFan"><div class="post-actions">♡ J'aime &nbsp;&nbsp; 💬 Commenter &nbsp;&nbsp; ↗ Partager</div></article>
+</main>
+<aside class="right-column"><div class="creator-card"><h3>À propos du créateur</h3><div class="creator-line"><img src="profile.jpg" alt="PiggyCraft"><div><strong>PiggyCraft</strong><br><span style="color:#888">@PiggyCraft88890</span></div></div><button class="subscribe">S'abonner gratuitement</button></div></aside>
+</div>
+</body></html>
